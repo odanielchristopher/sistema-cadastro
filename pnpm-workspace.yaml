@@ -1,0 +1,4 @@
+packages:
+  - 'apps/*'
+
+ignore-workspace-root-check: true

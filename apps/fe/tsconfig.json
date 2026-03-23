@@ -1,0 +1,15 @@
+{
+  "files": [],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@views/*": ["./src/views/*"],
+      "@app/*": ["./src/app/*"]
+    }
+  },
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
