@@ -6,3 +6,31 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Client {
+  id           String  @id @default(uuid()) @db.Uuid
+  name         String
+  cpf          String  @unique
+  email        String  @unique
+  observations String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  colorId String @map("color_id") @db.Uuid
+  color   Color  @relation(fields: [colorId], references: [id])
+
+  @@map("clients")
+}
+
+model Color {
+  id   String @id @default(uuid()) @db.Uuid
+  name String @unique
+  hex  String
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  clients Client[]
+
+  @@map("colors")
+}
