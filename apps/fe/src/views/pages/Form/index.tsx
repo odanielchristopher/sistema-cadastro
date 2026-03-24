@@ -1,32 +1,23 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import z from 'zod';
 
-import { Button } from '@views/components/ui/Button';
-import { Input } from '@views/components/ui/Input';
-import { InputFormatted } from '@views/components/ui/InputFormatted';
+import { Stepper } from '@views/components/app/Stepper';
+
+import { OthersInfo } from './steps/OthersInfo';
+import { othersInfoSchema } from './steps/OthersInfo/schema';
+import { ProfileInfo } from './steps/ProfileInfo';
+import { profileInfoSchema } from './steps/ProfileInfo/schema';
 
 const schema = z.object({
-  name: z
-    .string()
-    .nonempty('O nome é obrigatório')
-    .min(2, 'O nome deve ter mais de 2 caracteres'),
-  cpf: z
-    .string()
-    .min(11, 'O CPF deve ser válido')
-    .nonempty('O CPF é obrigatório'),
-  email: z
-    .string()
-    .email('O e-mail deve ser válido')
-    .nonempty('O e-mail é obrigatório'),
-  colorId: z.string().uuid().nonempty('A cor é obrigatória.'),
-  observation: z.string().optional(),
+  profileInfo: profileInfoSchema,
+  othersInfo: othersInfoSchema,
 });
 
-type FormData = z.infer<typeof schema>;
+export type ClientFormData = z.infer<typeof schema>;
 
 export function Form() {
-  const form = useForm<FormData>({
+  const form = useForm<ClientFormData>({
     resolver: zodResolver(schema),
   });
 
@@ -43,45 +34,21 @@ export function Form() {
         </p>
       </header>
 
-      <main className="bg-card mt-10 w-full max-w-[600px] rounded-xl border p-4">
-        <header>
-          <strong className="text-lg">Cadastro</strong>
-          <p className="mt-1">Preencha com os dados do cliente.</p>
-        </header>
-
-        <form onSubmit={handleSubmit} className="mt-8 space-y-3">
-          <Input
-            placeholder="Nome*"
-            {...form.register('name')}
-            error={form.formState.errors.name?.message}
-          />
-
-          <Controller
-            control={form.control}
-            name="cpf"
-            render={({ field: { value, onChange } }) => (
-              <InputFormatted
-                placeholder="CPF*"
-                type="text"
-                name="cpf"
-                value={value}
-                format="###.###.###-##"
-                onValueChange={(event) => onChange(event.value)}
-                error={form.formState.errors.cpf?.message}
-              />
-            )}
-          />
-
-          <Input
-            placeholder="E-mail*"
-            {...form.register('email')}
-            error={form.formState.errors.email?.message}
-          />
-
-          <Button className="mt-6 w-full" type="submit">
-            Cadastrar
-          </Button>
-        </form>
+      <main className="mt-10 w-full max-w-[600px]">
+        <FormProvider {...form}>
+          <form onSubmit={handleSubmit} className="mt-8 space-y-3">
+            <Stepper
+              initialStep={0}
+              steps={[
+                {
+                  label: 'Informações de pessoais',
+                  content: <ProfileInfo />,
+                },
+                { label: 'Outras informações', content: <OthersInfo /> },
+              ]}
+            />
+          </form>
+        </FormProvider>
       </main>
     </div>
   );
