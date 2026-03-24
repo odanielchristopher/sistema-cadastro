@@ -11,6 +11,8 @@ import {
   Put,
 } from '@nestjs/common';
 
+import { IsPublic } from '@shared/decorators/is-public.decorator';
+
 import { ColorsService } from './colors.service';
 import { CreateColorDto } from './dtos/create-color.dto';
 import { UpdateColorDto } from './dtos/update-color.dto';
@@ -20,6 +22,7 @@ export class ColorsController {
   constructor(private readonly colorsService: ColorsService) {}
 
   @Get()
+  @IsPublic()
   findAll() {
     return this.colorsService.findAll();
   }

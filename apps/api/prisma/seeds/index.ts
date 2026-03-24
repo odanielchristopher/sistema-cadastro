@@ -1,8 +1,9 @@
 import { colorsSeed } from './colors.seed';
+import { userSeed } from './user.seed';
 import { prisma } from './utils/prisma-client';
 
 async function main() {
-  await colorsSeed();
+  await Promise.all([userSeed(), colorsSeed()]);
 }
 
 main()

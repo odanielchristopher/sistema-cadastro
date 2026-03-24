@@ -13,6 +13,7 @@ import {
 } from '@nestjs/common';
 
 import { IsPaginated } from '@shared/decorators/is-paginated.decorator';
+import { IsPublic } from '@shared/decorators/is-public.decorator';
 
 import { ClientsService } from './clients.service';
 import { CreateClientDto } from './dtos/create-client.dto';
@@ -30,6 +31,7 @@ export class ClientsController {
   }
 
   @Post()
+  @IsPublic()
   create(@Body() createClientDto: CreateClientDto) {
     return this.clientsService.create(createClientDto);
   }
