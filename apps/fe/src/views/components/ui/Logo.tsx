@@ -25,7 +25,7 @@ export function Logo({ classNames, variant = 'long' }: ILogoProps) {
 
       {variant === 'long' && (
         <span className={cn('text-xl font-semibold', classNames?.title)}>
-          Neddo
+          Sistema de Cadastro
         </span>
       )}
     </div>
