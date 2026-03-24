@@ -23,7 +23,7 @@ export function ProfileInfo() {
   }
 
   return (
-    <div className="p-4">
+    <>
       <div className="space-y-3">
         <Input
           placeholder="Nome*"
@@ -63,6 +63,6 @@ export function ProfileInfo() {
           Próximo
         </StepperNextButton>
       </div>
-    </div>
+    </>
   );
 }

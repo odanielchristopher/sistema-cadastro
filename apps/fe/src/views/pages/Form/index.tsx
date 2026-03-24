@@ -36,7 +36,7 @@ export function Form() {
 
       <main className="mt-10 w-full max-w-[600px]">
         <FormProvider {...form}>
-          <form onSubmit={handleSubmit} className="mt-8 space-y-3">
+          <form onSubmit={handleSubmit} className="min-h-[340px] space-y-3">
             <Stepper
               initialStep={0}
               steps={[
