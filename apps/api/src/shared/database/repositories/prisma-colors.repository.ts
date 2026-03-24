@@ -13,16 +13,36 @@ export class PrismaColorsRepository implements ColorsRepository {
     return this.prismaService.color.findMany();
   }
 
+  findById(id: string): Promise<Color | null> {
+    return this.prismaService.color.findUnique({ where: { id } });
+  }
+
   findByName(name: string): Promise<Color | null> {
     return this.prismaService.color.findUnique({ where: { name } });
   }
 
-  async create(color: Pick<Color, 'name' | 'hex'>) {
+  create(color: Pick<Color, 'name' | 'hex'>) {
     return this.prismaService.color.create({
       data: {
         name: color.name,
         hex: color.hex,
       },
     });
+  }
+
+  update(color: Omit<Color, 'createdAt' | 'updatedAt'>): Promise<Color> {
+    if (!color.id) throw Error('Cannot update color without a valid id');
+
+    return this.prismaService.color.update({
+      where: { id: color.id },
+      data: {
+        name: color.name,
+        hex: color.hex,
+      },
+    });
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.prismaService.color.delete({ where: { id } });
   }
 }
