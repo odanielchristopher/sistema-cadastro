@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { apiReference } from '@scalar/nestjs-api-reference';
@@ -11,8 +11,17 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.useGlobalGuards();
-  app.useGlobalPipes();
   app.enableCors();
+  app.useGlobalInterceptors();
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
+    }),
+  );
 
   const config = new DocumentBuilder()
     .setTitle('Eteg Api')
