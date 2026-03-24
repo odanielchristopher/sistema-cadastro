@@ -8,7 +8,7 @@ const COLORS = [
   { name: 'Azul', hex: '#0000FF' },
   { name: 'Anil', hex: '#4B0082' },
   { name: 'Violeta', hex: '#8A2BE2' },
-];
+] as const;
 
 export async function colorsSeed() {
   for (const color of COLORS) {
