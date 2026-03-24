@@ -1,7 +1,5 @@
-export interface IUser {
+export type User = {
   id: string;
-  avatarPath?: string;
   name: string;
-  age: number;
   email: string;
-}
+};

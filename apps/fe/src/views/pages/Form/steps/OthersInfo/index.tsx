@@ -1,5 +1,6 @@
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
+import { ColorDropdownInput } from '@views/components/app/ColorDropdownInput';
 import { StepperPreviousButton } from '@views/components/app/Stepper';
 import { Button } from '@views/components/ui/Button';
 import { Textarea } from '@views/components/ui/Textarea';
@@ -7,12 +8,25 @@ import { Textarea } from '@views/components/ui/Textarea';
 import type { ClientFormData } from '../..';
 
 export function OthersInfo({ isLoading }: { isLoading?: boolean }) {
-  const { register, formState } = useFormContext<ClientFormData>();
+  const { register, control, formState } = useFormContext<ClientFormData>();
 
   return (
     <div className="flex flex-col p-4">
       <div className="flex w-full flex-col items-center">
         <div className="mt-8 w-full space-y-3">
+          <Controller
+            control={control}
+            name="othersInfo.colorId"
+            render={({ field }) => (
+              <ColorDropdownInput
+                placeholder="Selecione uma cor*"
+                value={field.value}
+                onChange={field.onChange}
+                error={formState.errors.othersInfo?.colorId?.message}
+              />
+            )}
+          />
+
           <Textarea
             placeholder="Observação (opcional)"
             {...register('othersInfo.observation')}

@@ -1,6 +1,6 @@
 import type { AxiosInstance } from 'axios';
 
-import type { IUser } from '@app/entities/User';
+import type { User } from '@app/entities/User';
 
 import { httpClient } from './httpClient';
 
@@ -18,5 +18,5 @@ class UsersService {
 export const usersService = new UsersService(httpClient);
 
 export namespace UsersService {
-  export type MeOutput = IUser;
+  export type MeOutput = User;
 }

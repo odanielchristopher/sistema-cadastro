@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 
 import { AUTH_QUERY_KEY } from '@app/config/constants';
 import { localStorageKeys } from '@app/config/localStorageKeys';
-import type { IUser } from '@app/entities/User';
+import type { User } from '@app/entities/User';
 import { httpClient } from '@app/services/httpClient';
 import { usersService } from '@app/services/usersService';
 import { capitalizeFirstLetter } from '@app/utils/capitalizeFirstLetter';
@@ -18,7 +18,7 @@ import { LaunchScreen } from '@views/components/app/LaunchScreen';
 
 interface IAuthContextValue {
   signedIn: boolean;
-  user: IUser | undefined;
+  user: User | undefined;
   signin(accessToken: string, refreshToken: string): void;
   signout(): void;
 }
