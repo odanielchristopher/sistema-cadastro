@@ -14,10 +14,10 @@ import {
 
 import { IsPaginated } from '@shared/decorators/is-paginated.decorator';
 
+import { ClientsService } from './clients.service';
 import { CreateClientDto } from './dtos/create-client.dto';
 import { FindManyClientsDto } from './dtos/find-many-clients.dto';
 import { UpdateClientDto } from './dtos/update-client.dto';
-import { ClientsService } from './clients.service';
 
 @Controller('clients')
 export class ClientsController {

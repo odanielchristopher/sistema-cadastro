@@ -18,7 +18,9 @@ export class CreateClientDto {
 
   @IsString()
   @IsNotEmpty()
-  @Matches(/^\d{11}$|^\d{3}\.\d{3}\.\d{3}-\d{2}$/)
+  @Matches(/^\d{11}$|^\d{3}\.\d{3}\.\d{3}-\d{2}$/, {
+    message: 'cpf need is valid',
+  })
   cpf: string;
 
   @IsString()
