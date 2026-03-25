@@ -5,15 +5,12 @@ RUN corepack enable && corepack prepare pnpm@10.7.0 --activate
 
 WORKDIR /app
 
-# Copiar manifests do workspace
 COPY pnpm-workspace.yaml ./
 COPY package.json pnpm-lock.yaml ./
 
-# Copiar apenas os package.json dos apps para aproveitar cache de camadas
 COPY apps/api/package.json ./apps/api/
 COPY apps/fe/package.json  ./apps/fe/
 
-# Instalar todas as deps (precisa das raiz também para o prisma client gerado)
 RUN pnpm install --frozen-lockfile
 
 # ─── Stage 2: build ──────────────────────────────────────────────────────────
@@ -31,7 +28,7 @@ COPY apps/api ./apps/api
 
 WORKDIR /app/apps/api
 
-# Gerar Prisma Client
+# Gera o client em apps/api/generated/prisma  (output = "../generated/prisma")
 RUN pnpm exec prisma generate
 
 RUN pnpm run build
@@ -45,7 +42,6 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
-# Copiar apenas o necessário para rodar
 COPY --from=builder /app/node_modules               ./node_modules
 COPY --from=builder /app/apps/api/node_modules      ./apps/api/node_modules
 COPY --from=builder /app/apps/api/dist              ./apps/api/dist
@@ -53,7 +49,16 @@ COPY --from=builder /app/apps/api/prisma.config.ts  ./apps/api/prisma.config.ts
 COPY --from=builder /app/apps/api/prisma            ./apps/api/prisma
 COPY --from=builder /app/apps/api/package.json      ./apps/api/package.json
 
-# Script de entrypoint (migrations + seed + start)
+# O client fica em apps/api/generated/prisma
+# O import nos fontes é bare: 'generated/prisma/client'
+# Node resolve bare imports SOMENTE via node_modules — não via path relativo.
+# Solução: symlink  apps/api/node_modules/generated  →  /app/apps/api/generated
+# Assim  require('generated/prisma/client')  resolve para
+#        apps/api/node_modules/generated/prisma/client  →  apps/api/generated/prisma/client  ✓
+COPY --from=builder /app/apps/api/generated         ./apps/api/generated
+RUN ln -s /app/apps/api/generated \
+          /app/apps/api/node_modules/generated
+
 COPY apps/api/docker-entrypoint.sh ./apps/api/docker-entrypoint.sh
 RUN chmod +x ./apps/api/docker-entrypoint.sh
 
