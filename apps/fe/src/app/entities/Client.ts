@@ -6,5 +6,5 @@ export type Client = {
   email: string;
   cpf: string;
   color: Color;
-  observation?: string;
+  observations: string | null;
 };

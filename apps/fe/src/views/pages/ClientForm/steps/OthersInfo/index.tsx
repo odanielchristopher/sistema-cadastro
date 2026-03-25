@@ -38,8 +38,8 @@ export function OthersInfo({ isLoading }: { isLoading?: boolean }) {
 
           <Textarea
             placeholder="Observação (opcional)"
-            {...register('othersInfo.observation')}
-            error={formState.errors.othersInfo?.observation?.message}
+            {...register('othersInfo.observations')}
+            error={formState.errors.othersInfo?.observations?.message}
           />
         </div>
       </div>

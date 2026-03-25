@@ -7,7 +7,7 @@ export type CreateClientInput = {
   email: string;
   cpf: string;
   colorId: string;
-  observation?: string;
+  observations?: string;
 };
 
 export async function create(input: CreateClientInput) {

@@ -60,7 +60,7 @@ export function InfiniteScrollContainer({
 
       <div
         className={cn(
-          'grid w-full place-items-center',
+          'mt-4 grid w-full place-items-center',
           !infiniteScroll?.isFetchingNextPage && 'size-0',
         )}
         ref={spinnerRef}

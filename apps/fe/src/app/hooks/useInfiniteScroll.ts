@@ -23,13 +23,14 @@ export function useInfiniteScroll<TResponse>({
     initialPageParam: 1,
     enabled,
     queryFn: ({ pageParam }) => infiniteLoader({ page: pageParam, perPage }),
-    getNextPageParam: (lastPage, allPages, lastPageParam) => {
-      const totalPages = Math.ceil(lastPage.items / perPage);
-      const isLastPage = allPages.length >= totalPages;
+    getNextPageParam: (lastPage) => {
+      const { page, totalPages } = lastPage.meta;
 
-      if (isLastPage) return null;
+      if (page >= totalPages) {
+        return undefined;
+      }
 
-      return lastPageParam + 1;
+      return page + 1;
     },
   });
 }

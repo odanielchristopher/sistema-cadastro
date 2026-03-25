@@ -9,6 +9,7 @@ import { Link } from 'react-router';
 
 import { useAuth } from '@app/hooks/useAuth';
 import { routes } from '@app/Router/routes';
+import { ClientsAccordion } from '@views/components/app/ClientsAccordion';
 import { ColorsTable } from '@views/components/app/ColorsTable';
 import { Button } from '@views/components/ui/Button';
 import {
@@ -88,7 +89,7 @@ export function Dashboard() {
             className="bg-card h-full w-full rounded-2xl border p-6"
             value="clients"
           >
-            <header>
+            <header className="mb-6">
               <div className="mb-2 flex items-center gap-3">
                 <Users2Icon />
                 <h3 className="text-lg font-semibold">Clientes cadastrados</h3>
@@ -98,6 +99,8 @@ export function Dashboard() {
                 Lista de todos os clientes que se cadastraram no sistema
               </p>
             </header>
+
+            <ClientsAccordion />
           </TabsContent>
 
           <TabsContent
