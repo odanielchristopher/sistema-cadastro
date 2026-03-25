@@ -20,5 +20,5 @@ export async function userSeed() {
   });
 
   // eslint-disable-next-line no-console
-  console.log('User seeded successfully');
+  console.log('🪪 User seeded successfully');
 }
