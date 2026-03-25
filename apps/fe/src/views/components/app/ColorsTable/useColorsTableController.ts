@@ -7,8 +7,10 @@ import { useDeleteColor } from '@app/hooks/useDeleteColor';
 
 export function useColorsTableController() {
   const { colors, isLoading } = useColors();
-  const { deleteColor, isLoading: isDeleting } = useDeleteColor();
   const [colorToDelete, setColorToDelete] = useState<Color | null>(null);
+  const { deleteColor, isLoading: isDeleting } = useDeleteColor(
+    colorToDelete?.id,
+  );
 
   function handleRequestDelete(color: Color) {
     setColorToDelete(color);

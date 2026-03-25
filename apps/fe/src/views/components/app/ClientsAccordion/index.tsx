@@ -1,4 +1,4 @@
-import { UserIcon } from 'lucide-react';
+import { UserIcon, WindIcon } from 'lucide-react';
 
 import { cn } from '@app/lib/utils';
 import { InfiniteScrollContainer } from '@views/components/app/InfiniteScrollContainer';
@@ -32,20 +32,21 @@ function getTintFromHex(hex: string) {
 }
 
 export function ClientsAccordion() {
-  const { clients, infiniteScroll, isLoading } =
+  const { clients, hasClients, infiniteScroll, isLoading } =
     useClientsAccordionController();
 
-  if (isLoading && clients.length === 0) {
+  if (isLoading && !hasClients) {
     return (
-      <div className="grid min-h-56 place-items-center">
+      <div className="grid h-[80%] place-items-center">
         <Spinner className="h-10 w-10" />
       </div>
     );
   }
 
-  if (!isLoading && clients.length === 0) {
+  if (!isLoading && !hasClients) {
     return (
-      <div className="text-muted-foreground grid min-h-56 place-items-center rounded-2xl border border-dashed">
+      <div className="text-muted-foreground flex min-h-56 flex-col items-center justify-center gap-4 rounded-2xl border border-dashed">
+        <WindIcon className="size-10" />
         Nenhum cliente cadastrado ainda.
       </div>
     );

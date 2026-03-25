@@ -7,6 +7,7 @@ export function useColors() {
   const { data, isFetching } = useQuery({
     queryKey: COLORS_QUERY_KEY(),
     queryFn: colorsService.getAll,
+    staleTime: Infinity,
   });
 
   return {
