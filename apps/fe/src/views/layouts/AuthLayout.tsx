@@ -2,6 +2,7 @@ import { HomeIcon } from 'lucide-react';
 import { Link, Outlet } from 'react-router';
 
 import { routes } from '@app/Router/routes';
+import { EtegLogo } from '@views/assets/EtegLogo';
 import { ThemeSwitcher } from '@views/components/app/ThemeSwitcher';
 import { Button } from '@views/components/ui/Button';
 import { Logo } from '@views/components/ui/Logo';
@@ -26,6 +27,8 @@ export function AuthLayout() {
 
         <ThemeSwitcher variant="outline" />
       </div>
+
+      <EtegLogo className="absolute left-6 top-6 h-10 w-20" />
 
       <div className="flex h-full w-full flex-col items-center justify-center gap-8">
         <Logo

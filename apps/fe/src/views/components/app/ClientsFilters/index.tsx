@@ -25,6 +25,7 @@ export function ClientsFilters({
 
       <ColorDropdownInput
         placeholder="Filtrar por cor"
+        className="h-full"
         value={colorId}
         allowClear
         onChange={(nextColorId) => onColorChange(nextColorId || undefined)}

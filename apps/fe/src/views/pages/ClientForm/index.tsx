@@ -3,6 +3,7 @@ import { FormProvider } from 'react-hook-form';
 import { Link } from 'react-router';
 
 import { routes } from '@app/Router/routes';
+import { EtegLogo } from '@views/assets/EtegLogo';
 import { Stepper } from '@views/components/app/Stepper';
 import { ThemeSwitcher } from '@views/components/app/ThemeSwitcher';
 import { Button } from '@views/components/ui/Button';
@@ -34,6 +35,8 @@ export function ClientForm() {
 
         <ThemeSwitcher variant="outline" />
       </div>
+
+      <EtegLogo className="absolute left-6 top-6 h-10 w-20" />
 
       <header className="flex flex-col items-center">
         <h1 className="mb-5 text-center text-3xl font-bold">
