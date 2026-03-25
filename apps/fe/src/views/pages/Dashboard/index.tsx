@@ -10,7 +10,9 @@ import { Link } from 'react-router';
 import { useAuth } from '@app/hooks/useAuth';
 import { routes } from '@app/Router/routes';
 import { ClientsAccordion } from '@views/components/app/ClientsAccordion';
+import { ClientsFilters } from '@views/components/app/ClientsFilters';
 import { ColorsTable } from '@views/components/app/ColorsTable';
+import { ThemeSwitcher } from '@views/components/app/ThemeSwitcher';
 import { Button } from '@views/components/ui/Button';
 import {
   Tabs,
@@ -27,6 +29,9 @@ export function Dashboard() {
   const {
     closeEditColorModal,
     closeNewColorModal,
+    clientsFilters,
+    handleClientNameChange,
+    handleColorChange,
     isEditColorModalOpen,
     isNewColorModalOpen,
     openEditColorModal,
@@ -44,7 +49,7 @@ export function Dashboard() {
             <small className="text-sm">Painel de administração</small>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex items-center gap-4">
             <Button
               type="button"
               variant="outline"
@@ -65,6 +70,12 @@ export function Dashboard() {
               <LogOutIcon />
               Sair
             </Button>
+
+            <ThemeSwitcher
+              variant="outline"
+              size="default"
+              className="p-3 px-3"
+            />
           </div>
         </div>
       </header>
@@ -100,7 +111,17 @@ export function Dashboard() {
               </p>
             </header>
 
-            <ClientsAccordion />
+            <ClientsFilters
+              clientName={clientsFilters.clientName}
+              colorId={clientsFilters.colorId}
+              onClientNameChange={handleClientNameChange}
+              onColorChange={handleColorChange}
+            />
+
+            <ClientsAccordion
+              clientName={clientsFilters.clientName}
+              colorId={clientsFilters.colorId}
+            />
           </TabsContent>
 
           <TabsContent

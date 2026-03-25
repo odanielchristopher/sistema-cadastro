@@ -27,6 +27,7 @@ export function ProfileInfo() {
       <div className="space-y-3">
         <Input
           placeholder="Nome*"
+          className="dark:bg-input/30 bg-white"
           {...register('profileInfo.name')}
           error={formState.errors.profileInfo?.name?.message}
         />
@@ -41,6 +42,7 @@ export function ProfileInfo() {
               name="cpf"
               value={value}
               format="###.###.###-##"
+              className="dark:bg-input/30 bg-white"
               onValueChange={(event) => onChange(event.value)}
               error={formState.errors.profileInfo?.cpf?.message}
             />
@@ -49,6 +51,7 @@ export function ProfileInfo() {
 
         <Input
           placeholder="E-mail*"
+          className="dark:bg-input/30 bg-white"
           {...register('profileInfo.email')}
           error={formState.errors.profileInfo?.email?.message}
         />

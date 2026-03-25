@@ -26,21 +26,33 @@ export class PrismaClientsRepository implements ClientsRepository {
     const perPage = Math.max(1, dto.perPage || 12);
     const skip = (page - 1) * perPage;
 
-    const where: Prisma.ClientWhereInput | undefined = dto.color
-      ? {
-          OR: [
-            { colorId: dto.color },
-            {
-              color: {
-                name: {
-                  contains: dto.color,
-                  mode: 'insensitive',
-                },
+    let where: Prisma.ClientWhereInput | undefined = undefined;
+
+    if (dto.color) {
+      where = {
+        OR: [
+          { colorId: dto.color },
+          {
+            color: {
+              name: {
+                contains: dto.color,
+                mode: 'insensitive',
               },
             },
-          ],
-        }
-      : undefined;
+          },
+        ],
+      };
+    }
+
+    if (dto.clientName) {
+      where = {
+        ...(where ?? {}),
+        name: {
+          contains: dto.clientName,
+          mode: 'insensitive',
+        },
+      };
+    }
 
     const [total, data] = await this.prismaService.$transaction([
       this.prismaService.client.count({ where }),

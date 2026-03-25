@@ -17,4 +17,8 @@ export class FindManyClientsDto {
   @IsOptional()
   @IsString()
   color?: string;
+
+  @IsOptional()
+  @IsString()
+  clientName?: string;
 }

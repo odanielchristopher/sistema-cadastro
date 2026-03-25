@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 
 import { routes } from '@app/Router/routes';
 import { Stepper } from '@views/components/app/Stepper';
+import { ThemeSwitcher } from '@views/components/app/ThemeSwitcher';
 import { Button } from '@views/components/ui/Button';
 
 import { OthersInfo } from './steps/OthersInfo';
@@ -16,19 +17,23 @@ export function ClientForm() {
 
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center px-6">
-      <Button
-        type="button"
-        variant="outline"
-        size="sm"
-        className="absolute right-4 top-6 rounded-md"
-        asChild
-      >
-        <Link to={routes.dashboard}>
-          <LockIcon />
+      <div className="absolute right-4 top-6 flex items-center gap-4">
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="rounded-md"
+          asChild
+        >
+          <Link to={routes.dashboard}>
+            <LockIcon />
 
-          <span className="leading-3">Ir para o painel</span>
-        </Link>
-      </Button>
+            <span className="leading-3">Ir para o painel</span>
+          </Link>
+        </Button>
+
+        <ThemeSwitcher variant="outline" />
+      </div>
 
       <header className="flex flex-col items-center">
         <h1 className="mb-5 text-center text-3xl font-bold">

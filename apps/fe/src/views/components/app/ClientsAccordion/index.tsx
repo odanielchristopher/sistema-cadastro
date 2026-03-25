@@ -11,11 +11,15 @@ import {
 } from '@views/components/ui/Accordion';
 import { Spinner } from '@views/components/ui/Spinner';
 
+import type { GetAllClientsFilters } from '@app/services/clientsService/getAll';
+
 import { useClientsAccordionController } from './useClientsAccordionController';
 
-export function ClientsAccordion() {
+type ClientsAccordionProps = GetAllClientsFilters;
+
+export function ClientsAccordion(props: ClientsAccordionProps = {}) {
   const { clients, hasClients, infiniteScroll, isLoading } =
-    useClientsAccordionController();
+    useClientsAccordionController(props);
 
   if (isLoading && !hasClients) {
     return (

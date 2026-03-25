@@ -15,27 +15,9 @@ interface IColorsDropdownInputProps {
   value?: string;
   placeholder?: string;
   disabled?: boolean;
+  allowClear?: boolean;
   onChange?(value: string): void;
 }
-
-// function getTintFromHex(hex: string) {
-//   const normalizedHex = hex.replace('#', '');
-
-//   if (normalizedHex.length !== 6) return '#ffffff';
-
-//   const red = Number.parseInt(normalizedHex.slice(0, 2), 16);
-//   const green = Number.parseInt(normalizedHex.slice(2, 4), 16);
-//   const blue = Number.parseInt(normalizedHex.slice(4, 6), 16);
-
-//   if ([red, green, blue].some(Number.isNaN)) return '#ffffff';
-
-//   const mix = (channel: number) =>
-//     Math.round(channel + (255 - channel) * 0.9)
-//       .toString(16)
-//       .padStart(2, '0');
-
-//   return `#${mix(red)}${mix(green)}${mix(blue)}`;
-// }
 
 export function ColorDropdownInput({
   className,
@@ -43,6 +25,7 @@ export function ColorDropdownInput({
   value,
   placeholder = 'Selecione uma cor',
   disabled,
+  allowClear,
   onChange,
 }: IColorsDropdownInputProps) {
   const { colors, isLoading } = useColors();
@@ -108,6 +91,18 @@ export function ColorDropdownInput({
               'dark:bg-card dark:border-accent',
             )}
           >
+            {allowClear && (
+              <RdxDropdownMenu.Item
+                onSelect={() => handleSelect('')}
+                className={cn(
+                  'hover:bg-accent focus:bg-accent focus:text-accent-foreground col-span-4 flex min-h-11 cursor-pointer items-center justify-center rounded-xl border border-dashed px-3 py-2 outline-none transition-colors',
+                  !value && 'bg-accent',
+                )}
+              >
+                <span className="text-sm font-medium">Todas as cores</span>
+              </RdxDropdownMenu.Item>
+            )}
+
             {colors.length > 0 ? (
               colors.map((color) => (
                 <RdxDropdownMenu.Item

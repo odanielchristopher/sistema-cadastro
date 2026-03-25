@@ -22,6 +22,7 @@ export function OthersInfo({ isLoading }: { isLoading?: boolean }) {
                 placeholder="Selecione uma cor*"
                 value={field.value}
                 onChange={field.onChange}
+                className="dark:bg-input/30 bg-white"
                 error={formState.errors.othersInfo?.colorId?.message}
               />
             )}
@@ -29,6 +30,7 @@ export function OthersInfo({ isLoading }: { isLoading?: boolean }) {
 
           <Textarea
             placeholder="Observação (opcional)"
+            className="dark:bg-input/30 bg-white"
             {...register('othersInfo.observations')}
             error={formState.errors.othersInfo?.observations?.message}
           />
@@ -36,7 +38,10 @@ export function OthersInfo({ isLoading }: { isLoading?: boolean }) {
       </div>
 
       <div className="mt-8 flex w-full items-center justify-end gap-3">
-        <StepperPreviousButton type="button" className="flex-1/2">
+        <StepperPreviousButton
+          type="button"
+          className="flex-1/2 dark:bg-secondary dark:hover:bg-secondary/80 bg-white"
+        >
           Anterior
         </StepperPreviousButton>
         <Button

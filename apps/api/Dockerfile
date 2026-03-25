@@ -31,10 +31,10 @@ COPY apps/api ./apps/api
 
 WORKDIR /app/apps/api
 
-RUN pnpm run build
-
 # Gerar Prisma Client
 RUN pnpm exec prisma generate
+
+RUN pnpm run build
 
 # ─── Stage 3: runner ─────────────────────────────────────────────────────────
 FROM node:22-alpine AS runner
@@ -49,9 +49,8 @@ ENV NODE_ENV=production
 COPY --from=builder /app/node_modules               ./node_modules
 COPY --from=builder /app/apps/api/node_modules      ./apps/api/node_modules
 COPY --from=builder /app/apps/api/dist              ./apps/api/dist
-COPY --from=builder /app/apps/api/generated         ./apps/api/generated
-COPY --from=builder /app/apps/api/prisma            ./apps/api/prisma
 COPY --from=builder /app/apps/api/prisma.config.ts  ./apps/api/prisma.config.ts
+COPY --from=builder /app/apps/api/prisma            ./apps/api/prisma
 COPY --from=builder /app/apps/api/package.json      ./apps/api/package.json
 
 # Script de entrypoint (migrations + seed + start)

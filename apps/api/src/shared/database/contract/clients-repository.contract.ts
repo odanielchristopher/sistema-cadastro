@@ -20,6 +20,7 @@ export type FindManyClientsDto = {
   page: number;
   perPage: number;
   color?: string;
+  clientName?: string;
 };
 
 export type CreateClientInput = {
