@@ -5,7 +5,7 @@ import { clientsService } from '@app/services/clientsService';
 export function useClientsInfiniteScroll() {
   const { data, isFetching, ...query } = useInfiniteScroll({
     queryKey: CLIENTS_QUERY_KEY(),
-    perPage: 1,
+    perPage: 20,
     infiniteLoader: clientsService.getAll,
   });
 

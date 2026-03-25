@@ -1,6 +1,7 @@
 import { UserIcon, WindIcon } from 'lucide-react';
 
 import { cn } from '@app/lib/utils';
+import { getTintFromHex } from '@app/utils/getTintiForHex';
 import { InfiniteScrollContainer } from '@views/components/app/InfiniteScrollContainer';
 import {
   Accordion,
@@ -11,25 +12,6 @@ import {
 import { Spinner } from '@views/components/ui/Spinner';
 
 import { useClientsAccordionController } from './useClientsAccordionController';
-
-function getTintFromHex(hex: string) {
-  const normalizedHex = hex.replace('#', '');
-
-  if (normalizedHex.length !== 6) return '#ffffff';
-
-  const red = Number.parseInt(normalizedHex.slice(0, 2), 16);
-  const green = Number.parseInt(normalizedHex.slice(2, 4), 16);
-  const blue = Number.parseInt(normalizedHex.slice(4, 6), 16);
-
-  const mix = (channel: number) =>
-    Math.round(channel + (255 - channel) * 0.88)
-      .toString(16)
-      .padStart(2, '0');
-
-  if ([red, green, blue].some(Number.isNaN)) return '#ffffff';
-
-  return `#${mix(red)}${mix(green)}${mix(blue)}`;
-}
 
 export function ClientsAccordion() {
   const { clients, hasClients, infiniteScroll, isLoading } =
@@ -65,7 +47,7 @@ export function ClientsAccordion() {
             <AccordionItem
               key={client.id}
               value={client.id}
-              className="bg-background mb-3 rounded-2xl border px-4 last:mb-0"
+              className="bg-accent mb-3 rounded-2xl border px-4 last:mb-0"
             >
               <AccordionTrigger className="py-4 hover:no-underline">
                 <div className="flex w-full items-center justify-between gap-4">
@@ -105,7 +87,7 @@ export function ClientsAccordion() {
               </AccordionTrigger>
 
               <AccordionContent className="pt-0">
-                <div className="bg-muted/30 grid gap-4 rounded-2xl p-4">
+                <div className="bg-background/30 grid gap-4 rounded-2xl p-4">
                   <div>
                     <span className="text-muted-foreground text-xs uppercase tracking-wide">
                       CPF

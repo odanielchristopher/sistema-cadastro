@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AxiosError } from 'axios';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import z from 'zod';
@@ -17,6 +18,7 @@ const schema = z.object({
 export type ClientFormData = z.infer<typeof schema>;
 
 export function useClientFormController() {
+  const [stepperKey, setStepperKey] = useState(0);
   const form = useForm<ClientFormData>({
     resolver: zodResolver(schema),
   });
@@ -33,6 +35,8 @@ export function useClientFormController() {
       });
 
       toast.success('Cadastro realizado com sucesso!');
+      form.reset();
+      setStepperKey((currentKey) => currentKey + 1);
     } catch (error) {
       if (error instanceof AxiosError && error.status === 409) {
         toast.error('Cliente já cadastrado');
@@ -46,6 +50,7 @@ export function useClientFormController() {
   });
 
   return {
+    stepperKey,
     isLoading,
     form,
     handleSubmit,

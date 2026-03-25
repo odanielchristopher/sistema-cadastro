@@ -11,7 +11,8 @@ import { ProfileInfo } from './steps/ProfileInfo';
 import { useClientFormController } from './useClientFormController';
 
 export function ClientForm() {
-  const { form, handleSubmit, isLoading } = useClientFormController();
+  const { form, isLoading, stepperKey, handleSubmit } =
+    useClientFormController();
 
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center px-6">
@@ -42,6 +43,7 @@ export function ClientForm() {
         <FormProvider {...form}>
           <form onSubmit={handleSubmit} className="min-h-[340px] space-y-3">
             <Stepper
+              key={stepperKey}
               initialStep={0}
               steps={[
                 {

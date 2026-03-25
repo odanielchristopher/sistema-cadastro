@@ -15,7 +15,7 @@ const { ClientForm } = lazyLoad(() => import('@views/pages/ClientForm'));
 
 export function Router() {
   return (
-    <Suspense fallback={<LaunchScreen />}>
+    <Suspense fallback={<LaunchScreen isLoading />}>
       <Routes>
         <Route element={<AuthGuard isPrivate />}>
           <Route path={routes.dashboard} element={<Dashboard />} />

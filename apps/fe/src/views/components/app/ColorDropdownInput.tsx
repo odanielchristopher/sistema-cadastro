@@ -3,6 +3,7 @@ import { ChevronDownIcon } from 'lucide-react';
 
 import { useColors } from '@app/hooks/useColors';
 import { cn } from '@app/lib/utils';
+import { getTintFromHex } from '@app/utils/getTintiForHex';
 import { ColorIcon } from '@views/assets/icons/ColorIcon';
 
 import { FieldError } from '../ui/FieldError';
@@ -17,24 +18,24 @@ interface IColorsDropdownInputProps {
   onChange?(value: string): void;
 }
 
-function getTintFromHex(hex: string) {
-  const normalizedHex = hex.replace('#', '');
+// function getTintFromHex(hex: string) {
+//   const normalizedHex = hex.replace('#', '');
 
-  if (normalizedHex.length !== 6) return '#ffffff';
+//   if (normalizedHex.length !== 6) return '#ffffff';
 
-  const red = Number.parseInt(normalizedHex.slice(0, 2), 16);
-  const green = Number.parseInt(normalizedHex.slice(2, 4), 16);
-  const blue = Number.parseInt(normalizedHex.slice(4, 6), 16);
+//   const red = Number.parseInt(normalizedHex.slice(0, 2), 16);
+//   const green = Number.parseInt(normalizedHex.slice(2, 4), 16);
+//   const blue = Number.parseInt(normalizedHex.slice(4, 6), 16);
 
-  if ([red, green, blue].some(Number.isNaN)) return '#ffffff';
+//   if ([red, green, blue].some(Number.isNaN)) return '#ffffff';
 
-  const mix = (channel: number) =>
-    Math.round(channel + (255 - channel) * 0.9)
-      .toString(16)
-      .padStart(2, '0');
+//   const mix = (channel: number) =>
+//     Math.round(channel + (255 - channel) * 0.9)
+//       .toString(16)
+//       .padStart(2, '0');
 
-  return `#${mix(red)}${mix(green)}${mix(blue)}`;
-}
+//   return `#${mix(red)}${mix(green)}${mix(blue)}`;
+// }
 
 export function ColorDropdownInput({
   className,
