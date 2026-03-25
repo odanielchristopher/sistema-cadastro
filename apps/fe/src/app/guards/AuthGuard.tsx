@@ -15,9 +15,5 @@ export function AuthGuard({ isPrivate }: IAuthGuardProps) {
     return <Navigate to={routes.login} replace />;
   }
 
-  if (signedIn && !isPrivate) {
-    return <Navigate to={routes.dashboard} replace />;
-  }
-
   return <Outlet />;
 }

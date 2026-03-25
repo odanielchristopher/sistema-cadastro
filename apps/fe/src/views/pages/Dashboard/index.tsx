@@ -5,7 +5,10 @@ import {
   PlusIcon,
   Users2Icon,
 } from 'lucide-react';
+import { Link } from 'react-router';
 
+import { useAuth } from '@app/hooks/useAuth';
+import { routes } from '@app/Router/routes';
 import { ColorsTable } from '@views/components/app/ColorsTable';
 import { Button } from '@views/components/ui/Button';
 import {
@@ -29,6 +32,7 @@ export function Dashboard() {
     openNewColorModal,
     selectedColor,
   } = useDashboardController();
+  const { signout } = useAuth();
 
   return (
     <div className="flex h-full w-full flex-col">
@@ -40,14 +44,22 @@ export function Dashboard() {
           </div>
 
           <div className="flex gap-4">
-            <Button type="button" variant="outline" className="rounded-sm">
-              <HomeIcon /> Ir para o cadastro
+            <Button
+              type="button"
+              variant="outline"
+              className="rounded-sm"
+              asChild
+            >
+              <Link to={routes.home}>
+                <HomeIcon /> Ir para o cadastro
+              </Link>
             </Button>
 
             <Button
               type="button"
               variant="outline"
               className="text-destructive hover:text-destructive/90 rounded-sm"
+              onClick={signout}
             >
               <LogOutIcon />
               Sair

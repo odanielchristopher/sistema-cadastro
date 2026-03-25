@@ -28,7 +28,7 @@ export function Login() {
           {...register('password')}
         />
 
-        <Button type="submit" className="mt-2" isLoading={isLoading}>
+        <Button type="submit" className="mt-2 rounded-md" isLoading={isLoading}>
           Entrar
         </Button>
       </form>

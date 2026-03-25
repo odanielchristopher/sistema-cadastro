@@ -1,6 +1,10 @@
+import { LockIcon } from 'lucide-react';
 import { FormProvider } from 'react-hook-form';
+import { Link } from 'react-router';
 
+import { routes } from '@app/Router/routes';
 import { Stepper } from '@views/components/app/Stepper';
+import { Button } from '@views/components/ui/Button';
 
 import { OthersInfo } from './steps/OthersInfo';
 import { ProfileInfo } from './steps/ProfileInfo';
@@ -10,7 +14,21 @@ export function ClientForm() {
   const { form, handleSubmit, isLoading } = useClientFormController();
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center px-6">
+    <div className="relative flex h-full w-full flex-col items-center justify-center px-6">
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        className="absolute right-4 top-6 rounded-md"
+        asChild
+      >
+        <Link to={routes.dashboard}>
+          <LockIcon />
+
+          <span className="leading-3">Ir para o painel</span>
+        </Link>
+      </Button>
+
       <header className="flex flex-col items-center">
         <h1 className="mb-5 text-center text-3xl font-bold">
           Sistema de Cadastro

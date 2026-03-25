@@ -19,7 +19,7 @@ import { LaunchScreen } from '@views/components/app/LaunchScreen';
 interface IAuthContextValue {
   signedIn: boolean;
   user: User | undefined;
-  signin(accessToken: string, refreshToken: string): void;
+  signin(accessToken: string): void;
   signout(): void;
 }
 

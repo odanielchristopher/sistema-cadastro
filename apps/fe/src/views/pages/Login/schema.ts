@@ -8,7 +8,7 @@ export const loginSchema = z.object({
   password: z
     .string()
     .nonempty('A senha é obrigatória.')
-    .min(6, 'A senha deve ter pelo menos 6 dígitos.'),
+    .min(4, 'A senha deve ter pelo menos 4 dígitos.'),
 });
 
 export type LoginData = z.infer<typeof loginSchema>;
