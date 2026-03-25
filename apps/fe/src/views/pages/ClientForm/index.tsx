@@ -6,7 +6,7 @@ import { OthersInfo } from './steps/OthersInfo';
 import { ProfileInfo } from './steps/ProfileInfo';
 import { useClientForm } from './useClientForm';
 
-export function Form() {
+export function ClientForm() {
   const { form, handleSubmit, isLoading } = useClientForm();
 
   return (
