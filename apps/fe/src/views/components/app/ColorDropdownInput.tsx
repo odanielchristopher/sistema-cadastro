@@ -1,9 +1,9 @@
 import * as RdxDropdownMenu from '@radix-ui/react-dropdown-menu';
-import { ColorIcon } from '@views/assets/icons/ColorIcon';
 import { ChevronDownIcon } from 'lucide-react';
 
 import { useColors } from '@app/hooks/useColors';
 import { cn } from '@app/lib/utils';
+import { ColorIcon } from '@views/assets/icons/ColorIcon';
 
 import { FieldError } from '../ui/FieldError';
 import { Spinner } from '../ui/Spinner';

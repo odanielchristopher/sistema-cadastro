@@ -1,5 +1,6 @@
-import { type IPaginatedResponse } from '@app/types/IPaginatedResponse';
 import { type QueryKey, useInfiniteQuery } from '@tanstack/react-query';
+
+import { type IPaginatedResponse } from '@app/types/IPaginatedResponse';
 
 type UseInfiniteScrollParams<TResponse> = {
   queryKey: QueryKey;
