@@ -1,6 +1,5 @@
-import type { IPaginatedResponse } from '@app/types/IPaginatedResponse';
-
 import type { Client } from '@app/entities/Client';
+import type { IPaginatedResponse } from '@app/types/IPaginatedResponse';
 import { sleep } from '@app/utils/sleep';
 
 import { httpClient } from '../httpClient';

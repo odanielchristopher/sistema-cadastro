@@ -4,16 +4,21 @@ import { useInfiniteScroll } from '@app/hooks/useInfiniteScroll';
 import { clientsService } from '@app/services/clientsService';
 
 export function useClientsInfiniteScroll() {
-  const query = useInfiniteScroll<Client>({
+  const { data, isFetching, ...query } = useInfiniteScroll<Client>({
     queryKey: CLIENTS_QUERY_KEY(),
     perPage: 1,
     infiniteLoader: clientsService.getAll,
   });
 
-  const clients = query.data?.pages.flatMap((page) => page.data) ?? [];
+  const clients = data?.pages.flatMap((page) => page.data) ?? [];
 
   return {
     clients,
-    ...query,
+    isLoading: isFetching,
+    infiniteScroll: {
+      nextPage: query.fetchNextPage,
+      hasNextPage: query.hasNextPage,
+      isFetchingNextPage: query.isFetchingNextPage,
+    },
   };
 }

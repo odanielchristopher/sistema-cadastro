@@ -2,13 +2,13 @@ import { UserIcon } from 'lucide-react';
 
 import { cn } from '@app/lib/utils';
 import { InfiniteScrollContainer } from '@views/components/app/InfiniteScrollContainer';
-import { Spinner } from '@views/components/ui/Spinner';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@views/components/ui/Accordion';
+import { Spinner } from '@views/components/ui/Spinner';
 
 import { useClientsAccordionController } from './useClientsAccordionController';
 
