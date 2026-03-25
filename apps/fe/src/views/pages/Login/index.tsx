@@ -17,6 +17,7 @@ export function Login() {
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-4">
         <Input
           placeholder="E-mail"
+          className="dark:bg-input/30 bg-white"
           error={errors.email?.message}
           {...register('email')}
         />
@@ -24,6 +25,7 @@ export function Login() {
         <Input
           type="password"
           placeholder="Senha"
+          className="dark:bg-input/30 bg-white"
           error={errors.password?.message}
           {...register('password')}
         />

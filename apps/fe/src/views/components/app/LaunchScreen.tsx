@@ -13,7 +13,9 @@ export function LaunchScreen({ isLoading }: { isLoading?: boolean }) {
             <div className="mb-4 flex items-center gap-2">
               <SquareChartGanttIcon className="size-8 text-white" />
 
-              <h1 className="text-2xl font-semibold text-white">Neddo</h1>
+              <h1 className="text-2xl font-semibold text-white">
+                Sistema de Cadastro
+              </h1>
             </div>
 
             <Spinner className="fill-primary-900" />
