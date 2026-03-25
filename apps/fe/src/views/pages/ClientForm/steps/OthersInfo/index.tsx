@@ -6,7 +6,7 @@ import { StepperPreviousButton } from '@views/components/app/Stepper';
 import { Button } from '@views/components/ui/Button';
 import { Textarea } from '@views/components/ui/Textarea';
 
-import type { ClientFormData } from '../../useClientForm';
+import type { ClientFormData } from '../../useClientFormController';
 
 export function OthersInfo({ isLoading }: { isLoading?: boolean }) {
   const { register, control, formState, ...form } =

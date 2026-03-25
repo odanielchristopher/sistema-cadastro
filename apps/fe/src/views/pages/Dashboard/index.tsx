@@ -6,6 +6,7 @@ import {
   Users2Icon,
 } from 'lucide-react';
 
+import { ColorsTable } from '@views/components/app/ColorsTable';
 import { Button } from '@views/components/ui/Button';
 import {
   Tabs,
@@ -13,8 +14,22 @@ import {
   TabsList,
   TabsTrigger,
 } from '@views/components/ui/Tabs';
+import { EditColorModal } from '@views/modals/EditColorModal';
+import { NewColorModal } from '@views/modals/NewColorModal';
+
+import { useDashboardController } from './useDashboardController';
 
 export function Dashboard() {
+  const {
+    closeEditColorModal,
+    closeNewColorModal,
+    isEditColorModalOpen,
+    isNewColorModalOpen,
+    openEditColorModal,
+    openNewColorModal,
+    selectedColor,
+  } = useDashboardController();
+
   return (
     <div className="flex h-full w-full flex-col">
       <header className="bg-card border-b py-4">
@@ -91,13 +106,28 @@ export function Dashboard() {
                 </p>
               </div>
 
-              <Button type="button" className="rounded-sm" size="sm">
+              <Button
+                type="button"
+                className="rounded-sm"
+                size="sm"
+                onClick={openNewColorModal}
+              >
                 <PlusIcon /> Adicionar nova cor
               </Button>
             </header>
+
+            <ColorsTable onEdit={openEditColorModal} />
           </TabsContent>
         </Tabs>
       </main>
+
+      <NewColorModal open={isNewColorModalOpen} onClose={closeNewColorModal} />
+
+      <EditColorModal
+        open={isEditColorModalOpen}
+        color={selectedColor}
+        onClose={closeEditColorModal}
+      />
     </div>
   );
 }

@@ -16,7 +16,7 @@ const schema = z.object({
 
 export type ClientFormData = z.infer<typeof schema>;
 
-export function useClientForm() {
+export function useClientFormController() {
   const form = useForm<ClientFormData>({
     resolver: zodResolver(schema),
   });

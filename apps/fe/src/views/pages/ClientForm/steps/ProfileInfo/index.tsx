@@ -5,7 +5,7 @@ import { StepperNextButton } from '@views/components/app/Stepper';
 import { Input } from '@views/components/ui/Input';
 import { InputFormatted } from '@views/components/ui/InputFormatted';
 
-import type { ClientFormData } from '../../useClientForm';
+import type { ClientFormData } from '../../useClientFormController';
 
 export function ProfileInfo() {
   const { register, formState, ...form } = useFormContext<ClientFormData>();

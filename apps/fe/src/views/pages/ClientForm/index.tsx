@@ -4,10 +4,10 @@ import { Stepper } from '@views/components/app/Stepper';
 
 import { OthersInfo } from './steps/OthersInfo';
 import { ProfileInfo } from './steps/ProfileInfo';
-import { useClientForm } from './useClientForm';
+import { useClientFormController } from './useClientFormController';
 
 export function ClientForm() {
-  const { form, handleSubmit, isLoading } = useClientForm();
+  const { form, handleSubmit, isLoading } = useClientFormController();
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center px-6">
