@@ -1,14 +1,23 @@
 import { Controller, useFormContext } from 'react-hook-form';
 
+import { useStepper } from '@app/hooks/useStepper';
 import { ColorDropdownInput } from '@views/components/app/ColorDropdownInput';
 import { StepperPreviousButton } from '@views/components/app/Stepper';
 import { Button } from '@views/components/ui/Button';
 import { Textarea } from '@views/components/ui/Textarea';
 
-import type { ClientFormData } from '../..';
+import type { ClientFormData } from '../../useClientForm';
 
 export function OthersInfo({ isLoading }: { isLoading?: boolean }) {
-  const { register, control, formState } = useFormContext<ClientFormData>();
+  const { register, control, formState, ...form } =
+    useFormContext<ClientFormData>();
+
+  const { changeStep } = useStepper();
+
+  if (formState.isSubmitSuccessful) {
+    changeStep(0);
+    form.reset();
+  }
 
   return (
     <div className="flex flex-col p-4">
@@ -45,7 +54,7 @@ export function OthersInfo({ isLoading }: { isLoading?: boolean }) {
           disabled={!formState.isValid || isLoading}
           isLoading={isLoading}
         >
-          Criar conta
+          Enviar
         </Button>
       </div>
     </div>
