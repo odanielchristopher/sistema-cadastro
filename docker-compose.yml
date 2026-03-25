@@ -1,0 +1,60 @@
+services:
+  # ── Banco de dados ────────────────────────────────────────────────────────
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-eteg}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432' # expõe para inspeção local (opcional)
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          'pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-eteg}',
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ── API (NestJS) ──────────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-eteg}
+      JWT_SECRET: ${JWT_SECRET:-changeme_in_production}
+      USER_NAME: ${USER_NAME:-Jhon Doe}
+      USER_EMAIL: ${USER_EMAIL:-root@mail.com}
+      USER_PASSWORD: ${USER_PASSWORD:-root}
+      NODE_ENV: production
+      PORT: 3000
+    ports:
+      - '3000:3000'
+
+  # ── Frontend (React/Vite → Nginx) ─────────────────────────────────────────
+  fe:
+    build:
+      context: .
+      dockerfile: apps/fe/Dockerfile
+      args:
+        # URL que o BROWSER usa para chamar a API — precisa ser acessível
+        # de fora do Docker, por isso usa localhost (ou o IP/domínio público)
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:3000}
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - '3001:80'
+
+volumes:
+  postgres_data:

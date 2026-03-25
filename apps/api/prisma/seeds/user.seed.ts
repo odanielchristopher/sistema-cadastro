@@ -1,8 +1,8 @@
 import { hash } from 'bcryptjs';
 
-import { SALT } from '@shared/constants.shared';
-
 import { prisma } from './utils/prisma-client';
+
+const SALT = 12;
 
 export async function userSeed() {
   const owner = {
